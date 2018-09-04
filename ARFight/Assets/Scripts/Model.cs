@@ -14,10 +14,10 @@ public class Model : MonoBehaviour
     protected Type _modelType = Type.None;
 
     /// <summary>
-    /// 模型初始的父节点。(自身的ImageTarget)
+    /// 模型初始的父节点。(原始的ImageTarget)
     /// </summary>
     [SerializeField]
-    private GameObject _originParentNode;
+    private GameObject _originImageTarget;
 
     /// <summary>
     /// 模型的动画器

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /* Author:       Running
 ** Time:         18.9.4
@@ -8,6 +9,8 @@ using System.Collections;
 
 public class EnvironmentModel : Model
 {
+    [SerializeField]
+    private List<Transform> _placeList = new List<Transform>();
 
     void Awake()
     {

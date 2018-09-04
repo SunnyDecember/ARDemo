@@ -147,6 +147,9 @@ namespace Vuforia
             {
                 modelArray[i].gameObject.SetActive(false);
             }
+
+            //todo Runing
+            //模型回归自身的ImageTarget
         }
     }
 }
