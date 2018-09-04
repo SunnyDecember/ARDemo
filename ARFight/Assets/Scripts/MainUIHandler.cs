@@ -27,9 +27,9 @@ public class MainUIHandler : MonoBehaviour
             TrackManager.Instance.ShowTrackStatus();
         });
 
-        separate.onClick.AddListener(() => 
-        {
-            TrackManager.Instance.Separate();
-        });
+        //separate.onClick.AddListener(() => 
+        //{
+        //    TrackManager.Instance.Separate();
+        //});
     }
 }

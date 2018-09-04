@@ -26,6 +26,7 @@ public class TrackManager
     {
         public TrackableBehaviour.Status previousStatus;
         public TrackableBehaviour.Status newStatus;
+        public bool isFound;
     }
 
     public static TrackManager Instance
@@ -40,14 +41,6 @@ public class TrackManager
         }
     }
 
-
-    public void Init() 
-    {
-        
-    }
-
-   
-
     /// <summary>
     /// 每次高通识别，都把状态记录起来。以便按钮按下可以进行恢复状态。
     /// </summary>
@@ -56,10 +49,26 @@ public class TrackManager
     /// <param name="status"></param>
     public void SetTrackStatus(GameObject obj, TrackableBehaviour.Status previousStatus, TrackableBehaviour.Status status) 
     {
+        //判断是否识别到。
+        bool isFound = false;
+        if (status == TrackableBehaviour.Status.DETECTED ||
+               status == TrackableBehaviour.Status.TRACKED ||
+               status == TrackableBehaviour.Status.EXTENDED_TRACKED)
+        {
+            isFound = true;
+        }
+        else
+        {
+            isFound = false;
+        }
+
+        //把当前ImageTarget状态记录起来。
         StatusData data = new StatusData();
         data.previousStatus = previousStatus;
         data.newStatus = status;
+        data.isFound = isFound;
 
+        //添加到字典中。
         if (_trackStatusDictionary.ContainsKey(obj))
         {
             _trackStatusDictionary[obj] = data;
@@ -75,13 +84,13 @@ public class TrackManager
     /// 每次高通识别丢失了,清除记录。
     /// </summary>
     /// <param name="obj"></param>
-    public void DeleteTrackStatus(GameObject obj) 
-    {
-        if(_trackStatusDictionary.ContainsKey(obj))
-        {
-            _trackStatusDictionary.Remove(obj);
-        }
-    }
+    //public void DeleteTrackStatus(GameObject obj) 
+    //{
+    //    if(_trackStatusDictionary.ContainsKey(obj))
+    //    {
+    //        _trackStatusDictionary.Remove(obj);
+    //    }
+    //}
 
     /// <summary>
     /// 按钮按下，恢复状态。
@@ -113,21 +122,21 @@ public class TrackManager
         isShowModel = false;
     }
 
-    public void Separate() 
-    {
-        foreach (var kv in _trackStatusDictionary)
-        {
-            if (null != kv.Key)
-            {
-                GameObject obj = kv.Key;
-                {
-                    Model[] handler = obj.GetComponentsInChildren<Model>(true);
-                    for (int i = 0; i < handler.Length; i++)
-                    {
-                        handler[i].transform.SetParent(null);
-                    }
-                }
-            }
-        }
-    }
+    //public void Separate() 
+    //{
+    //    foreach (var kv in _trackStatusDictionary)
+    //    {
+    //        if (null != kv.Key)
+    //        {
+    //            GameObject obj = kv.Key;
+    //            {
+    //                Model[] handler = obj.GetComponentsInChildren<Model>(true);
+    //                for (int i = 0; i < handler.Length; i++)
+    //                {
+    //                    handler[i].transform.SetParent(null);
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 }
