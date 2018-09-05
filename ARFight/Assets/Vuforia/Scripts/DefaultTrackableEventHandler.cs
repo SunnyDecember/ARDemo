@@ -137,7 +137,6 @@ namespace Vuforia
             {
                 modelArray[i].gameObject.SetActive(true);
             }
-
         }
 
         void MyTrackingLost() 
@@ -145,11 +144,10 @@ namespace Vuforia
             Model[] modelArray = transform.GetComponentsInChildren<Model>(true);
             for (int i = 0; i < modelArray.Length; i++)
             {
+                //模型需要做数据恢复。
                 modelArray[i].gameObject.SetActive(false);
+                modelArray[i].End();
             }
-
-            //todo Runing
-            //模型回归自身的ImageTarget
         }
     }
 }

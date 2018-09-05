@@ -4,8 +4,8 @@ using Vuforia;
 using System.Collections.Generic;
 
 /* Author:       Running
-** Time:         
-** Describtion:  
+** Time:         18.9.4
+** Describtion:  此类管理所有的ImageTarget.含有一个字典。
 */
 
 public class TrackManager
@@ -44,10 +44,10 @@ public class TrackManager
     /// <summary>
     /// 每次高通识别，都把状态记录起来。以便按钮按下可以进行恢复状态。
     /// </summary>
-    /// <param name="obj"></param>
+    /// <param name="imageTarget">为ImageTarget</param>
     /// <param name="previousStatus"></param>
     /// <param name="status"></param>
-    public void SetTrackStatus(GameObject obj, TrackableBehaviour.Status previousStatus, TrackableBehaviour.Status status) 
+    public void SetTrackStatus(GameObject imageTarget, TrackableBehaviour.Status previousStatus, TrackableBehaviour.Status status) 
     {
         //判断是否识别到。
         bool isFound = false;
@@ -69,15 +69,22 @@ public class TrackManager
         data.isFound = isFound;
 
         //添加到字典中。
-        if (_trackStatusDictionary.ContainsKey(obj))
+        if (_trackStatusDictionary.ContainsKey(imageTarget))
         {
-            _trackStatusDictionary[obj] = data;
+            _trackStatusDictionary[imageTarget] = data;
         }
         else 
         {
-            _trackStatusDictionary.Add(obj, data);
+            _trackStatusDictionary.Add(imageTarget, data);
         }
-        
+
+        //把模型添加到ModelManager中管理。
+        Model[] modelArray = imageTarget.transform.GetComponentsInChildren<Model>(true);
+        for (int i = 0; i < modelArray.Length; i++)
+        {
+            Model model = modelArray[i].gameObject.GetComponent<Model>();
+            ModelManager.Instance.AddModel(model);
+        }
     }
 
     /// <summary>
@@ -112,12 +119,12 @@ public class TrackManager
             }
         }
 
-        if (TrackerManager.Instance.GetTracker<ObjectTracker>() != null)
-        {
-            //TrackerManager.Instance.GetTracker<ObjectTracker>().Stop();
-            //TrackerManager.Instance.GetTracker<ObjectTracker>().PersistExtendedTracking(false);
-            Debug.Log("SHIBIEDA!脱离！");
-        }
+        //if (TrackerManager.Instance.GetTracker<ObjectTracker>() != null)
+        //{
+        //    TrackerManager.Instance.GetTracker<ObjectTracker>().Stop();
+        //    TrackerManager.Instance.GetTracker<ObjectTracker>().PersistExtendedTracking(false);
+        //    Debug.Log("SHIBIEDA!脱离！");
+        //}
      
         isShowModel = false;
     }

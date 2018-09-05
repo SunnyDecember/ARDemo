@@ -9,16 +9,29 @@ using System.Collections.Generic;
 
 public class EnvironmentModel : Model
 {
-    [SerializeField]
-    private List<Transform> _placeList = new List<Transform>();
+    public List<Transform> placeList = new List<Transform>();
 
     void Awake()
     {
-        _modelType = Model.Type.Environment;
+        type = Model.Type.Environment;
     }
      
     void Start ()
     {
         
+    }
+
+    public override void Action(Model model) 
+    {
+        if ((model.type & Model.Type.Animal) > 0)
+        {
+            _isHasTarget = true;
+        }
+    }
+
+    public override void End()
+    {
+        base.End();
+        _isHasTarget = false;
     }
 }
