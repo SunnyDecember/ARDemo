@@ -28,8 +28,9 @@ public class AnimalModel : Model
         //如果动物已经有目标，那么不往下执行。
         if (true == _isHasTarget) return;
 
+        //ModelNamager已经做了显示判断
         //如果自身还没激活。
-        if (false == gameObject.activeSelf) return;
+        //if (false == gameObject.activeSelf) return;
 
         //如果对方不是环境，也不往下执行。
         if ((model.type & Model.Type.Environment) < 0) return;
@@ -44,7 +45,7 @@ public class AnimalModel : Model
             _animator.SetBool("isSlithering", true);
 
         //恢复动画
-        Timer.Add(4.0f, (id, args) => 
+        Timer.Add(3.0f, (id, args) => 
         {
             if (null != _animator)
                 _animator.SetBool("isSlithering", false);

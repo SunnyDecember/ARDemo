@@ -112,12 +112,9 @@ namespace Vuforia
 
         #endregion // PRIVATE_METHODS
 
-        public void MyTrackableStateChanged(TrackableBehaviour.Status previousStatus,
-                                        TrackableBehaviour.Status newStatus) 
+        public void MyTrackableStateChanged(bool isFound) 
         {
-            if (newStatus == TrackableBehaviour.Status.DETECTED ||
-                newStatus == TrackableBehaviour.Status.TRACKED ||
-                newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
+            if (isFound)
             {
                 MyTrackingFound();
             }
@@ -137,6 +134,7 @@ namespace Vuforia
             {
                 modelArray[i].gameObject.SetActive(true);
             }
+            Debug.Log("ÏÔÊ¾----- " + transform.name);
         }
 
         void MyTrackingLost() 
@@ -148,6 +146,8 @@ namespace Vuforia
                 modelArray[i].gameObject.SetActive(false);
                 modelArray[i].End();
             }
+
+            Debug.Log("Òþ²Ø  " + transform.name);
         }
     }
 }

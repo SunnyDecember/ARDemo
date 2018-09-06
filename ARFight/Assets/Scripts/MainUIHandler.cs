@@ -24,7 +24,7 @@ public class MainUIHandler : MonoBehaviour
     {
         button.onClick.AddListener(() => 
         {
-            TrackManager.Instance.ShowTrackStatus();
+            TrackManager.Instance.SetTrackStatus();
         });
 
         //separate.onClick.AddListener(() => 

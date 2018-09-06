@@ -22,7 +22,7 @@ public class TrackManager
 
     private static TrackManager _instance = null;
 
-    struct StatusData 
+    class StatusData 
     {
         public TrackableBehaviour.Status previousStatus;
         public TrackableBehaviour.Status newStatus;
@@ -85,6 +85,21 @@ public class TrackManager
             Model model = modelArray[i].gameObject.GetComponent<Model>();
             ModelManager.Instance.AddModel(model);
         }
+
+        if (SceneData.Instance.type == SceneData.Type.SingleCard && isFound)
+        {
+            foreach (var kv in _trackStatusDictionary)
+            {
+                if (null != kv.Key && kv.Key != imageTarget)
+                {
+                    _trackStatusDictionary[kv.Key].isFound = false;
+                }
+            }
+        }
+
+        //如果没有识别到图片，这里就让模型消失吧。
+        if (false == isFound)
+            SetTrackStatus();
     }
 
     /// <summary>
@@ -102,18 +117,21 @@ public class TrackManager
     /// <summary>
     /// 按钮按下，恢复状态。
     /// </summary>
-    public void ShowTrackStatus() 
+    public void SetTrackStatus() 
     {
         isShowModel = true;
+
         foreach(var kv in _trackStatusDictionary)
         {
             if (null != kv.Key)
             {
-                GameObject obj = kv.Key;
-                if (obj.GetComponent<DefaultTrackableEventHandler>()) 
+                GameObject imageTarget = kv.Key;
+
+                //恢复状态
+                if (imageTarget.GetComponent<DefaultTrackableEventHandler>()) 
                 {
-                    DefaultTrackableEventHandler handler = obj.GetComponent<DefaultTrackableEventHandler>();
-                    handler.MyTrackableStateChanged(kv.Value.previousStatus, kv.Value.newStatus);
+                    DefaultTrackableEventHandler handler = imageTarget.GetComponent<DefaultTrackableEventHandler>();
+                    handler.MyTrackableStateChanged(kv.Value.isFound);
                     
                 }
             }

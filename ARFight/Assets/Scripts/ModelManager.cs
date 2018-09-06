@@ -52,8 +52,8 @@ public class ModelManager
                 //模型有在显示
                 //在一定范围内，模型间有所行动。
                 if (model1 != model2 && 
-                    //model1.gameObject.activeSelf &&
-                    //model2.gameObject.activeSelf &&
+                    model1.gameObject.activeSelf &&
+                    model2.gameObject.activeSelf &&
                     Vector3.Distance(model1.transform.position, model2.transform.position) < _nearDistance)
                 {
                     model1.Action(model2);
