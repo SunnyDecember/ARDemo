@@ -132,7 +132,10 @@ namespace Vuforia
             Model[] modelArray = transform.GetComponentsInChildren<Model>(true);
             for (int i = 0; i < modelArray.Length; i++)
             {
-                modelArray[i].gameObject.SetActive(true);
+				//Timer.Add (0.5f, (id, args)=>
+				//{
+					modelArray[i].gameObject.SetActive(true);	
+				//});
             }
             Debug.Log("œ‘ æ----- " + transform.name);
         }

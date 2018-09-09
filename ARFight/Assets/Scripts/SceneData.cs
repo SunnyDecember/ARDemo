@@ -29,6 +29,7 @@ public class SceneData
         None,    
         Menu,           //菜单场景
         SingleCard,     //单卡模型
-        MultiCard       //多卡模型
+        MultiCard,      //多卡模型
+        DrawModle       //绘画模型
     }
 }

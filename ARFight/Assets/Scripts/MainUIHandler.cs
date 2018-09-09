@@ -15,21 +15,25 @@ public class MainUIHandler : MonoBehaviour
     public Button button;
 
     public Button separate;
+
+
+
+   
     void Awake()
     {
-        
+       
     }
      
     void Start ()
     {
+     
+
         button.onClick.AddListener(() => 
         {
             TrackManager.Instance.SetTrackStatus();
         });
-
-        //separate.onClick.AddListener(() => 
-        //{
-        //    TrackManager.Instance.Separate();
-        //});
+      
+    
     }
+   
 }
