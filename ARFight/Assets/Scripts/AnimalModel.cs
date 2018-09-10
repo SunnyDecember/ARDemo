@@ -38,11 +38,15 @@ public class AnimalModel : Model
         _isHasTarget = true;
         EnvironmentModel environmentModel = model as EnvironmentModel;
         transform.SetParent(environmentModel.originImageTarget.transform);
-        transform.DOMove(environmentModel.placeList[0].position, 4);
-        transform.LookAt(environmentModel.placeList[0].position);
 
+        if (environmentModel.placeList.Count > 0)
+        {
+            transform.DOMove(environmentModel.placeList[0].position, 4);
+            transform.LookAt(environmentModel.placeList[0].position);
+        
         if (null != _animator)
             _animator.SetBool("isSlithering", true);
+        }
 
         //恢复动画
         Timer.Add(3.0f, (id, args) => 
