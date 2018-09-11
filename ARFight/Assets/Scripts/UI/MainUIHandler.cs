@@ -8,17 +8,17 @@ using UnityEngine.UI;
 */
 
 /// <summary>
-/// 控制住场景中所有UI
+/// 控制场景中所有UI
 /// </summary>
 public class MainUIHandler : MonoBehaviour
 {
-    public Button button;
+    /// <summary>
+    /// 识别
+    /// </summary>
+    public Button recognition;
 
     public Button separate;
-
-
-
-   
+    
     void Awake()
     {
        
@@ -26,14 +26,10 @@ public class MainUIHandler : MonoBehaviour
      
     void Start ()
     {
-     
-
-        button.onClick.AddListener(() => 
+        recognition.onClick.AddListener(() => 
         {
             TrackManager.Instance.SetTrackStatus();
         });
-      
-    
     }
    
 }

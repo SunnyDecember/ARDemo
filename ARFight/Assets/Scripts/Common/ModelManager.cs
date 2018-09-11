@@ -45,7 +45,7 @@ public class ModelManager
 
     public void Update() 
     {
-        List <Model> modelList = new List<Model>();
+        List <Model> modelList = new List<Model>(); //GC
 
         foreach (var model1 in _allModelList)
         {
@@ -77,7 +77,7 @@ public class ModelManager
             }    
         }
 
-        //清空空的模型
+        //清空空的模型.以免在此单例中残留。
         for (int i = 0; i < modelList.Count; i++)
         {
             _allModelList.Remove(modelList[i]);

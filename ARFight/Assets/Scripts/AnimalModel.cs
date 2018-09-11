@@ -89,14 +89,14 @@ public class AnimalModel : Model
             transform.LookAt(environmentModel.placeList[0].position);
         
         if (null != _animator)
-            _animator.SetBool("isSlithering", true);
+            _animator.SetBool("isWalking", true);
         }
 
         //恢复动画
         Timer.Add(3.0f, (id, args) => 
         {
             if (null != _animator)
-                _animator.SetBool("isSlithering", false);
+                _animator.SetBool("isWalking", false);
 
             Timer.DeleteTimerWith(id);
         });
@@ -109,6 +109,6 @@ public class AnimalModel : Model
         transform.localPosition = Vector3.zero;
 
         if (null != _animator)
-            _animator.SetBool("isSlithering", false);
+            _animator.SetBool("isWalking", false);
     }
 }

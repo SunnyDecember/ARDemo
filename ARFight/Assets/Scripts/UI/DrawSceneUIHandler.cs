@@ -142,7 +142,7 @@ public class DrawSceneUIHandler : MonoBehaviour
             GameObject.Destroy(tran.gameObject);
         }
 
-        GameObject modelMap = ResourcesHelper.Instance.Get("UILoad/UILoading", referenceMap);
+        GameObject modelMap = ResourcesHelper.Instance.Get("ReferenceMap/" + name, referenceMap);
     }
 
     private void ModelHide(params object[] args)
