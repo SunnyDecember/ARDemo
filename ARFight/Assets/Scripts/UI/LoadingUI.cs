@@ -19,6 +19,7 @@ public class LoadingUI : MonoBehaviour
     {
         gameObject.SetActive(true);
         frontImage.fillAmount = 0;
+        _totalTime = 0f;
     }
 
     private void Update()
