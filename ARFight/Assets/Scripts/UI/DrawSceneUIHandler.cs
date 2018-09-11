@@ -174,13 +174,10 @@ public class DrawSceneUIHandler : MonoBehaviour
         string name = args[0] as string;
 
         //删除同名的参考图模型
-        Transform[] transforms = referenceMap.GetComponentsInChildren<Transform>();
-        for (int i = 0; i < transforms.Length; i++)
+        Transform child = referenceMap.FindChild(name);
+        if(null != child)
         {
-            Transform tran = transforms[i];
-
-            if(tran.name.Trim() == name.Trim() && (tran != referenceMap))
-                GameObject.Destroy(tran.gameObject);
+            GameObject.Destroy(child.gameObject);
         }
     }
 
