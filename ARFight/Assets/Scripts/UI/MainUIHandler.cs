@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /* Author:       Running
 ** Time:         
@@ -18,7 +19,13 @@ public class MainUIHandler : MonoBehaviour
     public Button recognition;
 
     public Button separate;
-    
+
+    [SerializeField]
+    private Button _clearButton;
+
+    [SerializeField]
+    private Button _backButton;
+
     void Awake()
     {
        
@@ -29,6 +36,17 @@ public class MainUIHandler : MonoBehaviour
         recognition.onClick.AddListener(() => 
         {
             TrackManager.Instance.SetTrackStatus();
+        });
+
+        _clearButton.onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene("MainScene");
+        });
+
+        _backButton.onClick.AddListener(() =>
+        {
+            SceneData.Instance.type = SceneData.Type.Menu;
+            SceneManager.LoadScene("MenuScene");
         });
     }
    

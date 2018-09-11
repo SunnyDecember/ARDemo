@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /* Author:       Running
 ** Time:         
@@ -37,6 +38,12 @@ public class DrawSceneUIHandler : MonoBehaviour
     public Slider ColorSize;
 
     public Transform referenceMap;
+
+    [SerializeField]
+    private Button _clearButton;
+
+    [SerializeField]
+    private Button _backButton;
 
     private P3D_ClickToPaint _script;
      
@@ -93,6 +100,17 @@ public class DrawSceneUIHandler : MonoBehaviour
         {
             _script.Brush.Color = Color.white;
         });
+
+        _clearButton.onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene("DrawScene");
+        });
+
+        _backButton.onClick.AddListener(() =>
+        {
+            SceneData.Instance.type = SceneData.Type.Menu;
+            SceneManager.LoadScene("MenuScene");
+        });
         
         ColorSize.onValueChanged.AddListener((float value) =>
         {
@@ -139,10 +157,16 @@ public class DrawSceneUIHandler : MonoBehaviour
         for (int i = 0; i < transforms.Length; i++)
         {
             Transform tran = transforms[i];
-            GameObject.Destroy(tran.gameObject);
+            if (tran != referenceMap)
+                GameObject.Destroy(tran.gameObject);
         }
 
         GameObject modelMap = ResourcesHelper.Instance.Get("ReferenceMap/" + name, referenceMap);
+        modelMap.name = name;
+        modelMap.transform.localPosition = new Vector3(0, -80, 0);
+        modelMap.transform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));
+        modelMap.transform.localScale = new Vector3(30, 30, 30);
+        ResourcesHelper.Instance.ModifyLayer(modelMap.transform, 5);
     }
 
     private void ModelHide(params object[] args)
@@ -155,7 +179,7 @@ public class DrawSceneUIHandler : MonoBehaviour
         {
             Transform tran = transforms[i];
 
-            if(tran.name.Trim() == name.Trim())
+            if(tran.name.Trim() == name.Trim() && (tran != referenceMap))
                 GameObject.Destroy(tran.gameObject);
         }
     }

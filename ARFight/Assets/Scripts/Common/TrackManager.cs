@@ -49,6 +49,8 @@ public class TrackManager
     /// <param name="status"></param>
     public void SetTrackStatus(GameObject imageTarget, TrackableBehaviour.Status previousStatus, TrackableBehaviour.Status status) 
     {
+        DeleteNullObject();
+
         //判断是否识别到。
         bool isFound = false;
         if (status == TrackableBehaviour.Status.DETECTED ||
@@ -102,6 +104,27 @@ public class TrackManager
         //如果没有识别到图片，这里就让模型消失吧。
         if (false == isFound)
             SetTrackStatus();
+    }
+
+    /// <summary>
+    /// 移除多余的对象
+    /// </summary>
+    private void DeleteNullObject() 
+    {
+        List<GameObject> nullObject = new List<GameObject>();
+
+        foreach (var kv in _trackStatusDictionary)
+        {
+            if(null == kv.Key)
+            {
+                nullObject.Add(kv.Key);
+            }
+        }
+
+        for (int i = 0; i < nullObject.Count; i++)
+        {
+            _trackStatusDictionary.Remove(nullObject[i]);
+        }
     }
 
     /// <summary>

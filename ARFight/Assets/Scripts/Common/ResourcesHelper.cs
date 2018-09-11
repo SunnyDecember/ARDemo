@@ -45,4 +45,18 @@ public class ResourcesHelper
 
         return obj;
     }
+
+    /// <summary>
+    /// 更改所有子节点的层级
+    /// </summary>
+    /// <param name="tran"></param>
+    public void ModifyLayer(Transform tran, int layerIndex) 
+    {
+        Transform[] array = tran.GetComponentsInChildren<Transform>();
+        for (int i = 0; i < array.Length; i++)
+        {
+            Transform child = array[i];
+            child.gameObject.layer = layerIndex;
+        }
+    }
 }

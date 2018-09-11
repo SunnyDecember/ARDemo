@@ -22,6 +22,15 @@ public class ModelManager
 
     private static ModelManager _instance = null;
 
+    public HashSet<Model> AllModelList 
+    {
+        get 
+        {
+            DeleteNullObject();
+            return _allModelList;
+        }
+    }
+
     public static ModelManager Instance
     {
         get 
@@ -45,25 +54,12 @@ public class ModelManager
 
     public void Update() 
     {
-        List <Model> modelList = new List<Model>(); //GC
+        DeleteNullObject();
 
         foreach (var model1 in _allModelList)
         {
             foreach (var model2 in _allModelList)
             {
-                //记录那些模型是空的
-                if (model1 == null)
-                {
-                    modelList.Add(model1);
-                    continue;
-                }
-
-                if (model2 == null)
-                {
-                    modelList.Add(model2);
-                    continue;
-                }
-
                 //模型有在显示
                 //在一定范围内，模型间有所行动。
                 if (model1 != model2 && 
@@ -75,6 +71,19 @@ public class ModelManager
                     model2.Action(model1);
                 }
             }    
+        }
+    }
+
+    private void DeleteNullObject() 
+    {
+        List<Model> modelList = new List<Model>(); //GC
+
+        foreach (var model in _allModelList) 
+        {
+            if (null == model)
+            {
+                modelList.Add(model);
+            }
         }
 
         //清空空的模型.以免在此单例中残留。
