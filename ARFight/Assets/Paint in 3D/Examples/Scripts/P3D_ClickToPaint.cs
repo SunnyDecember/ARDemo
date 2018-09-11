@@ -48,19 +48,19 @@ public class P3D_ClickToPaint : MonoBehaviour
 	// Called every frame
 	protected virtual void Update()
 	{
-#if UNITY_IOS || UNITY_ANDROID
-        if (Input.touches.Length == 1)
-        {
-            Touch touch = Input.touches[0];
-            PaintToScreen(touch.position);
-        }
-#else
+//#if UNITY_IOS || UNITY_ANDROID
+//        if (Input.touches.Length == 1)
+//        {
+//            Touch touch = Input.touches[0];
+//            PaintToScreen(touch.position);
+//        }
+//#else
         // The required key is down?
         if (Input.GetKey(Requires))
         {
             PaintToScreen(Input.mousePosition);
         }
-#endif
+//#endif
 	}
 
     private void PaintToScreen(Vector3 position)
