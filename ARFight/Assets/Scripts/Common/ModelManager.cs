@@ -45,10 +45,25 @@ public class ModelManager
 
     public void Update() 
     {
-        foreach(var model1 in _allModelList)
+        List <Model> modelList = new List<Model>();
+
+        foreach (var model1 in _allModelList)
         {
             foreach (var model2 in _allModelList)
             {
+                //记录那些模型是空的
+                if (model1 == null)
+                {
+                    modelList.Add(model1);
+                    continue;
+                }
+
+                if (model2 == null)
+                {
+                    modelList.Add(model2);
+                    continue;
+                }
+
                 //模型有在显示
                 //在一定范围内，模型间有所行动。
                 if (model1 != model2 && 
@@ -60,6 +75,12 @@ public class ModelManager
                     model2.Action(model1);
                 }
             }    
+        }
+
+        //清空空的模型
+        for (int i = 0; i < modelList.Count; i++)
+        {
+            _allModelList.Remove(modelList[i]);
         }
     }
 }

@@ -16,11 +16,7 @@ public class SceneData
     {
         get
         {
-            if (null == _instance)
-            {
-                _instance = new SceneData();
-            }
-            return _instance;
+            return _instance ?? (_instance = new SceneData());
         }
     }
 

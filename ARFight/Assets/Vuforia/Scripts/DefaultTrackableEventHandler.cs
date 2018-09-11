@@ -1,4 +1,4 @@
-/*==============================================================================
+Ôªø/*==============================================================================
 Copyright (c) 2010-2014 Qualcomm Connected Experiences, Inc.
 All Rights Reserved.
 Confidential and Proprietary - Protected under copyright and other laws.
@@ -134,10 +134,11 @@ namespace Vuforia
             {
 				//Timer.Add (0.5f, (id, args)=>
 				//{
-					modelArray[i].gameObject.SetActive(true);	
-				//});
+					modelArray[i].gameObject.SetActive(true);
+                //});
+
+                EventCenter.Instance.PostEvent(EventName.ModelShow, modelArray[i].name);
             }
-            Debug.Log("œ‘ æ----- " + transform.name);
         }
 
         void MyTrackingLost() 
@@ -145,12 +146,12 @@ namespace Vuforia
             Model[] modelArray = transform.GetComponentsInChildren<Model>(true);
             for (int i = 0; i < modelArray.Length; i++)
             {
-                //ƒ£–Õ–Ë“™◊ˆ ˝æ›ª÷∏¥°£
+                //Ê®°ÂûãÈúÄË¶ÅÂÅöÊï∞ÊçÆÊÅ¢Â§ç„ÄÇ
                 modelArray[i].gameObject.SetActive(false);
                 modelArray[i].End();
-            }
 
-            Debug.Log("“˛≤ÿ  " + transform.name);
+                EventCenter.Instance.PostEvent(EventName.ModelHide, modelArray[i].name);
+            }
         }
     }
 }

@@ -21,11 +21,12 @@ public class MenuSceneUI : MonoBehaviour
     /// </summary>
     [SerializeField]
     private Button _multiCardButton;
+
     /// <summary>
     /// 绘画模型
     /// </summary>
     [SerializeField]
-    private Button _DrawModleButton;
+    private Button _drawModleButton;
 
     void Awake() 
     {
@@ -45,10 +46,11 @@ public class MenuSceneUI : MonoBehaviour
             SceneData.Instance.type = SceneData.Type.MultiCard;
             SceneManager.LoadScene("MainScene");
         });
-      _DrawModleButton.onClick.AddListener(() =>
-      {
-          SceneData.Instance.type = SceneData.Type.DrawModle;
-          SceneManager.LoadScene("DrawScene");
-      });
+
+        _drawModleButton.onClick.AddListener(() =>
+        {
+            SceneData.Instance.type = SceneData.Type.DrawModle;
+            SceneManager.LoadScene("DrawScene");
+        });
     }
 }

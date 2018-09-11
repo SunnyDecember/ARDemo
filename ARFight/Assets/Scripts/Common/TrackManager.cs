@@ -56,10 +56,12 @@ public class TrackManager
                status == TrackableBehaviour.Status.EXTENDED_TRACKED)
         {
             isFound = true;
+            EventCenter.Instance.PostEvent(EventName.ModelFound);
         }
         else
         {
             isFound = false;
+            EventCenter.Instance.PostEvent(EventName.ModelLost);
         }
 
         //把当前ImageTarget状态记录起来。

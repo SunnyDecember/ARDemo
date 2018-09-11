@@ -16,6 +16,7 @@ public class Model : MonoBehaviour
     /// <summary>
     /// 模型的类型
     /// </summary>
+    [HideInInspector]
     public Type type = Type.None;
 
     /// <summary>
@@ -28,16 +29,6 @@ public class Model : MonoBehaviour
         None = 1 << 1,
         Animal = 1 << 2,         //动物(蛇，熊...)
         Environment = 1 << 4     //环境(比如树...)
-    }
-
-    void Awake()
-    {
-        
-    }
-     
-    void Start ()
-    {
-        
     }
 
     /// <summary>
